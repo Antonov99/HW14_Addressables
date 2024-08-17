@@ -4,7 +4,7 @@ using Zenject;
 
 namespace SampleGame
 {
-    public sealed class PauseScreen : MonoBehaviour
+    public sealed class PauseScreen : MonoBehaviour, IInitialize
     {
         [SerializeField]
         private Button resumeButton;
@@ -12,37 +12,37 @@ namespace SampleGame
         [SerializeField]
         private Button exitButton;
 
-        private MenuLoader menuLoader;
+        private MenuLoader _menuLoader;
 
         [Inject]
-        public void Construct(MenuLoader menuLoader, GameLoader gameLoader)
+        public void Construct(MenuLoader menuLoader)
         {
-            this.menuLoader = menuLoader;
-            this.gameObject.SetActive(false);
+            _menuLoader = menuLoader;
         }
 
-        private void OnEnable()
+        public void Initialize()
         {
-            this.resumeButton.onClick.AddListener(this.Hide);
-            this.exitButton.onClick.AddListener(this.menuLoader.LoadMenu);
+            Hide();
+            resumeButton.onClick.AddListener(Hide);
+            exitButton.onClick.AddListener(_menuLoader.LoadMenu);
         }
 
-        private void OnDisable()
+        private void OnDestroy()
         {
-            this.resumeButton.onClick.RemoveListener(this.Hide);
-            this.exitButton.onClick.RemoveListener(this.menuLoader.LoadMenu);
+            resumeButton.onClick.RemoveListener(Hide);
+            exitButton.onClick.RemoveListener(_menuLoader.LoadMenu);
         }
 
         public void Show()
         {
             Time.timeScale = 0; //KISS
-            this.gameObject.SetActive(true);
+            gameObject.SetActive(true);
         }
 
-        public void Hide()
+        private void Hide()
         {
             Time.timeScale = 1; //KISS
-            this.gameObject.SetActive(false);
+            gameObject.SetActive(false);
         }
     }
 }

@@ -1,19 +1,13 @@
-using UnityEngine.SceneManagement;
-
+using JetBrains.Annotations;
+using UnityEngine.AddressableAssets;
 namespace SampleGame
 {
+    [UsedImplicitly]
     public sealed class GameLoader
     {
-        //TODO: Сделать через Addressables
-        public void UnloadGame()
-        {
-            SceneManager.UnloadSceneAsync("Game");
-        }
-        
-        //TODO: Сделать через Addressables
         public void LoadGame()
         {
-            SceneManager.LoadScene("Game");
+            Addressables.LoadSceneAsync("Game");
         }
     }
 }

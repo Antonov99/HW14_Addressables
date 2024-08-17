@@ -16,7 +16,7 @@ namespace SampleGame
 
         void IFixedTickable.FixedTick()
         {
-            this.character.Move(this.moveInput.GetDirection(), Time.deltaTime);
+            character.Move(moveInput.GetDirection(), Time.deltaTime);
         }
     }
 }

@@ -16,32 +16,34 @@ namespace SampleGame
 
         public override void InstallBindings()
         {
-            this.Container
+            Container
                 .Bind<Camera>()
-                .FromInstance(this.camera);
+                .FromInstance(camera);
 
-            this.Container
+            Container
                 .Bind<ICharacter>()
                 .FromComponentInHierarchy()
                 .AsSingle();
 
-            this.Container
+            Container
                 .BindInterfacesTo<MoveController>()
                 .AsCached()
                 .NonLazy();
             
-            this.Container
+            Container
                 .Bind<IMoveInput>()
                 .To<MoveInput>()
                 .AsSingle()
-                .WithArguments(this.inputConfig)
+                .WithArguments(inputConfig)
                 .NonLazy();
 
-            this.Container
+            Container
                 .BindInterfacesTo<CameraFollower>()
                 .AsCached()
-                .WithArguments(this.cameraConfig.cameraOffset)
+                .WithArguments(cameraConfig.cameraOffset)
                 .NonLazy();
+            
+            
         }
     }
 }

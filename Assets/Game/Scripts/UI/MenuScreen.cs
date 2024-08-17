@@ -1,11 +1,10 @@
-using SampleGame;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
 namespace SampleGame
 {
-    public sealed class MenuScreen : MonoBehaviour
+    public sealed class MenuScreen : MonoBehaviour,IInitialize
     {
         [SerializeField]
         private Button startButton;
@@ -13,26 +12,26 @@ namespace SampleGame
         [SerializeField]
         private Button exitButton;
         
-        private ApplicationExiter applicationExiter;
-        private GameLoader gameLoader;
+        private ApplicationExiter _applicationExiter;
+        private GameLoader _gameLoader;
         
         [Inject]
         public void Construct(ApplicationExiter applicationFinisher, GameLoader gameLoader)
         {
-            this.gameLoader = gameLoader;
-            this.applicationExiter = applicationFinisher;
+            _applicationExiter = applicationFinisher;
+            _gameLoader = gameLoader;
         }
 
-        private void OnEnable()
+        public void Initialize()
         {
-            this.startButton.onClick.AddListener(this.gameLoader.LoadGame);
-            this.exitButton.onClick.AddListener(this.applicationExiter.ExitApp);
+            startButton.onClick.AddListener(_gameLoader.LoadGame);
+            exitButton.onClick.AddListener(_applicationExiter.ExitApp);
         }
 
         private void OnDisable()
         {
-            this.startButton.onClick.RemoveListener(this.gameLoader.LoadGame);
-            this.exitButton.onClick.RemoveListener(this.applicationExiter.ExitApp);
+            startButton.onClick.RemoveListener(_gameLoader.LoadGame);
+            exitButton.onClick.RemoveListener(_applicationExiter.ExitApp);
         }
     }
 }

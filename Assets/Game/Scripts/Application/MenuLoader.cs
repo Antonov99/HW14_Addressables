@@ -1,13 +1,14 @@
-using UnityEngine.SceneManagement;
+using JetBrains.Annotations;
+using UnityEngine.AddressableAssets;
 
 namespace SampleGame
 {
+    [UsedImplicitly]
     public sealed class MenuLoader
     {
-        //TODO: Сделать через Addressables
         public void LoadMenu()
         {
-            SceneManager.LoadScene("Menu");
+            Addressables.LoadSceneAsync("Menu");
         }
     }
 }

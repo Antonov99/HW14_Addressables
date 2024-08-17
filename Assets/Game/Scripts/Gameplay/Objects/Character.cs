@@ -9,12 +9,12 @@ namespace SampleGame
 
         public void Move(Vector3 direction, float deltaTime)
         {
-            this.transform.position += direction * (deltaTime * this.speed);
+            transform.position += direction * (deltaTime * speed);
         }
 
         public Vector3 GetPosition()
         {
-            return this.transform.position;
+            return transform.position;
         }
     }
 }
