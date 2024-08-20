@@ -1,12 +1,11 @@
 using JetBrains.Annotations;
-using SampleGame;
 using UnityEngine;
 using Zenject;
 
-namespace Game.Scripts
+namespace SampleGame
 {
     [UsedImplicitly]
-    public class Factory
+    public sealed class AddressablesAssetFactory
     {
         private LocalAssetLoader _localAssetLoader;
         private DiContainer _diContainer;

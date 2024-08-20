@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
@@ -9,7 +8,7 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 namespace SampleGame
 {
     [UsedImplicitly]
-    public class LocalAssetLoader
+    public sealed class LocalAssetLoader
     {
         public readonly Dictionary<string,GameObject> _gameObjects=new ();
         
@@ -32,9 +31,16 @@ namespace SampleGame
             Addressables.Release(handle);
         }
 
-        public void Unload<T>()
+        public bool Unload(string id)
         {
+            var result = Addressables.ReleaseInstance(_gameObjects[id]);
             
+            if (result)
+                _gameObjects.Remove(id);
+            else
+                Debug.LogWarning($"Failed to unload asset with ID: {id}, the asset has already been unloaded");
+            
+            return result;
         }
     }
 }

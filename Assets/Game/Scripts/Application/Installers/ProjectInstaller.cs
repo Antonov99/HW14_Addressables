@@ -1,4 +1,3 @@
-using Game.Scripts;
 using UnityEngine;
 using Zenject;
 
@@ -16,7 +15,8 @@ namespace SampleGame
             Container.Bind<GameLoader>().AsSingle().NonLazy();
             Container.Bind<MenuLoader>().AsSingle().NonLazy();
             Container.Bind<LocalAssetLoader>().AsSingle().NonLazy();
-            Container.Bind<Factory>().AsSingle().NonLazy();
+            Container.Bind<AddressablesAssetFactory>().AsSingle().NonLazy();
+            Container.Bind<LocationSpawnManager>().AsSingle().NonLazy();
         }
     }
 }

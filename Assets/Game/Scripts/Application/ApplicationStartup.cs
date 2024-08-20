@@ -1,25 +1,25 @@
-using Game.Scripts;
+
 using UnityEngine;
 using Zenject;
 
 namespace SampleGame
 {
-    public class ApplicationStartup : MonoBehaviour
+    public sealed class ApplicationStartup : MonoBehaviour
     {
         [SerializeField]
         private Transform parent;
 
         private LocalAssetLoader _localAssetLoader;
-        private Factory _factory;
+        private AddressablesAssetFactory _addressablesAssetFactory;
 
         private const string _MENU_ID = "MenuScreen";
         private const string _PAUSE_ID = "PauseScreen";
 
         [Inject]
-        public void Construct(LocalAssetLoader localAssetLoader, Factory factory)
+        public void Construct(LocalAssetLoader localAssetLoader, AddressablesAssetFactory addressablesAssetFactory)
         {
             _localAssetLoader = localAssetLoader;
-            _factory = factory;
+            _addressablesAssetFactory = addressablesAssetFactory;
         }
 
         private async void Start()
@@ -27,7 +27,7 @@ namespace SampleGame
             await _localAssetLoader.Load<GameObject>(_MENU_ID);
             await _localAssetLoader.Load<GameObject>(_PAUSE_ID);
             
-            _factory.InstantiateObject<MenuScreen>(_MENU_ID, parent);
+            _addressablesAssetFactory.InstantiateObject<MenuScreen>(_MENU_ID, parent);
         }
     }
 }

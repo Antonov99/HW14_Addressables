@@ -1,4 +1,3 @@
-using Game.Scripts;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -13,22 +12,22 @@ namespace SampleGame
         [SerializeField]
         private Transform parent;
 
-        private Factory _factory;
+        private AddressablesAssetFactory _addressablesAssetFactory;
 
         private PauseScreen _pauseScreen;
-        
+
         private const string _PAUSE_ID = "PauseScreen";
-        
+
         [Inject]
-        public void Construct(Factory factory)
+        public void Construct(AddressablesAssetFactory addressablesAssetFactory)
         {
-            _factory = factory;
+            _addressablesAssetFactory = addressablesAssetFactory;
         }
 
         private void OnEnable()
         {
             button.onClick.AddListener(Show);
-            _pauseScreen = _factory.InstantiateObject<PauseScreen>(_PAUSE_ID,parent);
+            _pauseScreen = _addressablesAssetFactory.InstantiateObject<PauseScreen>(_PAUSE_ID, parent);
         }
 
         private void OnDisable()

@@ -42,8 +42,6 @@ namespace SampleGame
                 .AsCached()
                 .WithArguments(cameraConfig.cameraOffset)
                 .NonLazy();
-            
-            
         }
     }
 }

@@ -1,7 +1,9 @@
+using JetBrains.Annotations;
 using UnityEditor;
 
 namespace SampleGame
 {
+    [UsedImplicitly]
     public sealed class ApplicationExiter
     {
         public void ExitApp()
